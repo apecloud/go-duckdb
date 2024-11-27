@@ -114,9 +114,9 @@ func (r *arrowStreamReader) Release() {
 		C.duckdb_destroy_arrow(r.res)
 		r.res = nil
 	}
-	if r.Stmt != nil {
-		r.Stmt.Close()
-		r.Stmt = nil
+	if r.stmt != nil {
+		r.stmt.Close()
+		r.stmt = nil
 	}
 }
 
