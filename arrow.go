@@ -94,7 +94,7 @@ func NewArrowFromConn(driverConn driver.Conn) (*Arrow, error) {
 // arrowStreamReader implements array.RecordReader for streaming DuckDB results.
 type arrowStreamReader struct {
 	ctx        context.Context
-	stmt       *stmt
+	stmt       *Stmt
 	res        *C.duckdb_arrow
 	schema     *arrow.Schema
 	rowCount   uint64
@@ -114,9 +114,9 @@ func (r *arrowStreamReader) Release() {
 		C.duckdb_destroy_arrow(r.res)
 		r.res = nil
 	}
-	if r.stmt != nil {
-		r.stmt.Close()
-		r.stmt = nil
+	if r.Stmt != nil {
+		r.Stmt.Close()
+		r.Stmt = nil
 	}
 }
 
